@@ -1,4 +1,4 @@
-package org.eduorg.msauth.config;
+package org.eduorg.msauth.common.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerTypePredicate;
@@ -10,7 +10,7 @@ public class RestPrefix implements WebMvcConfigurer {
 
     @Override
         public void configurePathMatch(PathMatchConfigurer configurer) {
-            configurer.addPathPrefix("/api/v1", HandlerTypePredicate.forBasePackage("org.eduorg"));
+            configurer.addPathPrefix("/api/v1", HandlerTypePredicate.forBasePackage("org.eduorg.msauth"));
         }
 }
 

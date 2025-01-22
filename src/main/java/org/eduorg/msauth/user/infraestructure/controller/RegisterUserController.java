@@ -1,37 +1,36 @@
 package org.eduorg.msauth.user.infraestructure.controller;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.eduorg.msauth.common.application.aspects.LoggerAspect;
+import org.eduorg.msauth.common.application.aspects.logger.LoggerAspect;
 import org.eduorg.msauth.common.application.service.IService;
+import org.eduorg.msauth.common.infraestructure.logger.LoggerAspectImpl;
+import org.eduorg.msauth.common.infraestructure.password_encoder.PasswordEncoderImpl;
 import org.eduorg.msauth.common.utils.result.Result;
-import org.eduorg.msauth.user.application.SingUpApplicationService;
-import org.eduorg.msauth.user.application.dto.SignUpApplicationEntryDto;
-import org.eduorg.msauth.user.domain.repository.IUserRepository;
+import org.eduorg.msauth.user.application.sing_up.SingUpApplicationService;
+import org.eduorg.msauth.user.application.sing_up.dto.SignUpApplicationEntryDto;
 import org.eduorg.msauth.user.infraestructure.dto.RegisterUserEntryDto;
-import org.eduorg.msauth.user.application.dto.SignUpApplicationResponseDto;
+import org.eduorg.msauth.user.application.sing_up.dto.SignUpApplicationResponseDto;
+import org.eduorg.msauth.user.infraestructure.repository.UserRepositoryImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user/signup")
-@RequiredArgsConstructor
 public class RegisterUserController {
 
-    final IUserRepository OdmUserRepositoryImpl;
+    final UserRepositoryImpl userRepository;
+    final LoggerAspectImpl loggerAspect;
+    final PasswordEncoderImpl passwordEncoder;
 
+    public RegisterUserController(UserRepositoryImpl userRepository, LoggerAspectImpl loggerAspect, PasswordEncoderImpl passwordEncoder) {
+        this.userRepository = userRepository;
+        this.loggerAspect = loggerAspect;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @PostMapping
     public ResponseEntity<SignUpApplicationResponseDto> execute( @Valid @RequestBody RegisterUserEntryDto user )  throws Exception {
-        System.out.println("RegisterUserController.execute");
-
-
-
-        IService<SignUpApplicationEntryDto, SignUpApplicationResponseDto> service =
-                new LoggerAspect<>(
-                        new SingUpApplicationService(OdmUserRepositoryImpl)
-        );
 
         SignUpApplicationEntryDto dto = new SignUpApplicationEntryDto(
                 user.getEmail(),
@@ -40,7 +39,14 @@ public class RegisterUserController {
                 user.getLastname(),
                 user.getPhoneCode(),
                 user.getPhoneNumber(),
-                user.getBirthdate());
+                user.getBirthdate(),
+                user.getGender()
+        );
+
+        IService<SignUpApplicationEntryDto, SignUpApplicationResponseDto> service = new LoggerAspect<>(
+                new SingUpApplicationService( userRepository, passwordEncoder ),
+                new LoggerAspectImpl()
+        );
 
         Result<SignUpApplicationResponseDto> res = service.execute(dto);
 
@@ -52,8 +58,8 @@ public class RegisterUserController {
     }
 
     @GetMapping("/test")
-    public String test() {
+    public ResponseEntity<String> test() {
         System.out.println("RegisterUserController.test");
-        return "Test";
+        return new ResponseEntity<>("Test", HttpStatus.OK);
     }
 }

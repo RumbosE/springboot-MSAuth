@@ -1,4 +1,4 @@
-package org.eduorg.msauth.user.application.dto;
+package org.eduorg.msauth.user.application.sing_up.dto;
 
 import org.eduorg.msauth.common.application.service.dto.ApplicationServiceEntryDto;
 
@@ -14,8 +14,9 @@ public class SignUpApplicationEntryDto extends ApplicationServiceEntryDto {
     String phoneCode;
     String phone;
     Date birthdate;
+    String gender;
 
-    public SignUpApplicationEntryDto(String email, String password, String name, String surname, String phoneCode, String phone, Date birthdate) {
+    public SignUpApplicationEntryDto(String email, String password, String name, String surname, String phoneCode, String phone, Date birthdate, String gender) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -23,6 +24,7 @@ public class SignUpApplicationEntryDto extends ApplicationServiceEntryDto {
         this.phoneCode = phoneCode;
         this.phone = phone;
         this.birthdate = birthdate;
+        this.gender = gender;
     }
 
     public String getEmail() {
@@ -52,5 +54,7 @@ public class SignUpApplicationEntryDto extends ApplicationServiceEntryDto {
     public Date getBirthdate() {
         return birthdate;
     }
+
+    public String getGender() {return gender;}
     
 }

@@ -3,9 +3,10 @@ package org.eduorg.msauth.user.domain.events;
 import org.eduorg.msauth.common.domain.domain_events.DomainEvents;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class UserCreatedEvent extends DomainEvents {
-    public final String id;
+    public final UUID id;
     public final String name;
     public final String email;
     public final String phone;
@@ -13,7 +14,7 @@ public class UserCreatedEvent extends DomainEvents {
     public final String gender;
 
     private UserCreatedEvent (
-            String id, String name, String email, String phone, Date date, String gender
+            UUID id, String name, String email, String phone, Date date, String gender
     ) {
         this.id = id;
         this.name = name;
@@ -24,7 +25,7 @@ public class UserCreatedEvent extends DomainEvents {
     }
 
     public static UserCreatedEvent create(
-            String id, String name, String email, String phone, Date date, String gender
+            UUID id, String name, String email, String phone, Date date, String gender
     ) {
         return new UserCreatedEvent(id, name, email, phone, date, gender);
     }

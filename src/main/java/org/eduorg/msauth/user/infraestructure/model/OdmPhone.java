@@ -1,16 +1,11 @@
 package org.eduorg.msauth.user.infraestructure.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
 public class OdmPhone {
+    private String code;
     private String number;
-    private String areaCode;
-
-    public OdmPhone(String number, String areaCode) {
-        this.number = number;
-        this.areaCode = areaCode;
-    }
 }

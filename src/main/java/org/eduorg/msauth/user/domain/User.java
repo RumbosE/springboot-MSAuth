@@ -11,16 +11,15 @@ import org.eduorg.msauth.user.domain.vo.*;
 
 public class User extends AggregateRoot<UserId> {
 
-
     private final UserId id;
     private UserName name;
     private final UserEmail email;
     private UserPhone phone;
     private UserBirthdate birthdate;
-    private UserGender gender;
+    private final UserGender gender;
 
     public User( UserId id, UserName name, UserEmail email, UserPhone phone, UserBirthdate birthdate, UserGender gender) {
-        super( id, UserCreatedEvent.create( id.getId(), name.getFullName(), email.getEmail(), phone.getPhone(), birthdate.getBirthdate(), gender.toString() ));
+        super( id, UserCreatedEvent.create( id.getId(), name.getFullName(), email.getEmail(), phone.getFullPhone(), birthdate.getBirthdate(), gender.toString() ));
         this.id = id;
         this.name = name;
         this.email = email;
@@ -39,7 +38,7 @@ public class User extends AggregateRoot<UserId> {
                 this.name = ((UserNameUpdatedEvent)event).getNewUserName();
                 break;
             case "UserPhoneUpdatedEvent":
-                System.out.println("UserPhoneUpdatedEvent, old phone: " + ((UserPhoneUpdatedEvent)event).getOldPhone().getPhone() + ", new phone: " + ((UserPhoneUpdatedEvent)event).getNewPhone().getPhone());
+                System.out.println("UserPhoneUpdatedEvent, old phone: " + ((UserPhoneUpdatedEvent)event).getOldPhone().getFullPhone() + ", new phone: " + ((UserPhoneUpdatedEvent)event).getNewPhone().getFullPhone());
                 this.phone = ((UserPhoneUpdatedEvent)event).getNewPhone();
                 break;
             case "UserBirthdateUpdatedEvent":
@@ -53,7 +52,7 @@ public class User extends AggregateRoot<UserId> {
     }
 
     @Override
-    public void ensureValidState() throws InvalidUserStateException {
+    public void ensureValidState() {
         if (
                 this.id == null ||
                 this.name == null ||

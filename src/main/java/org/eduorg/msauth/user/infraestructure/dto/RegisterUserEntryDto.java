@@ -2,6 +2,7 @@ package org.eduorg.msauth.user.infraestructure.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -39,4 +40,8 @@ public class RegisterUserEntryDto {
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     Date birthdate;
+
+    @NotBlank(message = "Gender is mandatory")
+    @Pattern(regexp = "[MFO]", message="Gender must be G, M, or O")
+    String gender;
 }

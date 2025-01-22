@@ -10,7 +10,7 @@ import java.util.concurrent.Future;
 
 public interface IUserRepository {
 
-    void saveUser(User user);
+    void saveUser(User user, String password);
 
     Optional<User> findUserById(UserId id);
 

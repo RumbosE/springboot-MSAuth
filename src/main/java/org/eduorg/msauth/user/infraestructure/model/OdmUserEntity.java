@@ -1,36 +1,32 @@
 package org.eduorg.msauth.user.infraestructure.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "users")
 public class OdmUserEntity {
 
     @Id
-    private String id;
+    private UUID id;
     private String name;
     private String lastname;
     private String password;
+    @Indexed(unique = true)
     private String email;
     private OdmPhone phone;
     private String gender;
     private Date birthdate;
 
-    public OdmUserEntity(
-            String id, String name, String lastname, String email, OdmPhone phone, String gender, Date birthdate, String password
-    ) {
-        this.id = id;
-        this.name = name;
-        this.lastname = lastname;
-        this.email = email;
-        this.phone = phone;
-        this.gender = gender;
-        this.birthdate = birthdate;
-        this.password = password;
-
-    }
 }

@@ -1,4 +1,4 @@
-package org.eduorg.msauth.user.application.dto;
+package org.eduorg.msauth.user.application.sing_up.dto;
 
 
 import lombok.AllArgsConstructor;

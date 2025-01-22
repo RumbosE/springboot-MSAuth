@@ -1,12 +1,15 @@
 package org.eduorg.msauth.user.infraestructure.mappers;
 
+import lombok.NoArgsConstructor;
 import org.eduorg.msauth.common.application.mapper.IMapper;
 import org.eduorg.msauth.user.domain.User;
 import org.eduorg.msauth.user.domain.vo.*;
 import org.eduorg.msauth.user.infraestructure.model.OdmPhone;
 import org.eduorg.msauth.user.infraestructure.model.OdmUserEntity;
 
+import java.util.UUID;
 
+@NoArgsConstructor
 public class UserMapper implements IMapper<User, OdmUserEntity> {
 
     @Override
@@ -14,19 +17,18 @@ public class UserMapper implements IMapper<User, OdmUserEntity> {
 
         OdmPhone phone = new OdmPhone(
                 domain.getPhone().getPhoneCode(),
-                domain.getPhone().getPhoneCode()
+                domain.getPhone().getPhoneNumber()
         );
 
-            return new OdmUserEntity(
-                    domain.getId().getId(),
-                    domain.getName().getName(),
-                    domain.getName().getLastname(),
-                    domain.getEmail().getEmail(),
-                    phone,
-                    domain.getGender().toString(),
-                    domain.getBirthdate().getBirthdate(),
-                    null
-            );
+        return OdmUserEntity.builder()
+                .id(domain.getId().getId())
+                .name(domain.getName().getName())
+                .lastname(domain.getName().getLastname())
+                .email(domain.getEmail().getEmail())
+                .phone(phone)
+                .gender(domain.getGender().toString())
+                .birthdate(domain.getBirthdate().getBirthdate())
+                .build();
     }
 
     @Override
@@ -36,7 +38,7 @@ public class UserMapper implements IMapper<User, OdmUserEntity> {
                 UserId.create(persistence.getId()),
                 UserName.create(persistence.getName(), persistence.getLastname()),
                 UserEmail.create(persistence.getEmail()),
-                UserPhone.create(persistence.getPhone().getAreaCode(), persistence.getPhone().getNumber()),
+                UserPhone.create(persistence.getPhone().getCode(), persistence.getPhone().getNumber()),
                 UserBirthdate.create(persistence.getBirthdate()),
                 mapGender(persistence.getGender())
         );

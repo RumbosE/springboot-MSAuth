@@ -3,18 +3,20 @@ package org.eduorg.msauth.user.domain.vo;
 import org.eduorg.msauth.common.domain.value_object.ValueObject;
 import org.eduorg.msauth.user.domain.exceptions.InvalidUserIdException;
 
+import java.util.UUID;
+
 public class UserId implements ValueObject<UserId> {
 
-        private final String id;
+        private final UUID id;
 
-        private UserId(String userId) {
-            if(userId == null || userId.length() < 4) {
+        private UserId(UUID userId) {
+            if( userId == null ) {
                 throw new InvalidUserIdException();
             }
             this.id = userId;
         }
 
-        public String getId() {
+        public UUID getId() {
             return id;
         }
 
@@ -23,7 +25,7 @@ public class UserId implements ValueObject<UserId> {
             return this.id.equals(valueObject.getId());
         }
 
-        public static UserId create(String userId) {
+        public static UserId create(UUID userId) {
             return new UserId(userId);
         }
 

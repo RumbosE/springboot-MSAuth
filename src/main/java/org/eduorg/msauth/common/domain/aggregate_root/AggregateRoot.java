@@ -3,13 +3,12 @@ package org.eduorg.msauth.common.domain.aggregate_root;
 import org.eduorg.msauth.common.domain.domain_events.DomainEvents;
 import org.eduorg.msauth.common.domain.entity.Entity;
 import org.eduorg.msauth.common.domain.value_object.ValueObject;
-import org.eduorg.msauth.user.domain.exceptions.InvalidUserStateException;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public abstract class AggregateRoot<T extends ValueObject<T>> extends Entity<T> {
 
-    protected List<DomainEvents> domainEvents;
+    protected ArrayList<DomainEvents> domainEvents = new ArrayList<>();
 
     public AggregateRoot(T id, DomainEvents event) {
         super(id);
@@ -22,10 +21,10 @@ public abstract class AggregateRoot<T extends ValueObject<T>> extends Entity<T> 
 
     public abstract void applyEvent(DomainEvents event);
 
-    public abstract void ensureValidState() throws InvalidUserStateException;
+    public abstract void ensureValidState();
 
-    public List<DomainEvents> pullDomainEvents() {
-        List<DomainEvents> events = this.domainEvents;
+    public ArrayList<DomainEvents> pullDomainEvents() {
+        ArrayList<DomainEvents> events = this.domainEvents;
         this.domainEvents.clear();
         return events;
     }
