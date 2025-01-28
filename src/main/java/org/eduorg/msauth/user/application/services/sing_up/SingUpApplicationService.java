@@ -1,11 +1,11 @@
-package org.eduorg.msauth.user.application.sing_up;
+package org.eduorg.msauth.user.application.services.sing_up;
 
 import org.eduorg.msauth.common.application.password_encoder.IPasswordEncoder;
 import org.eduorg.msauth.user.application.exceptions.UserEmailAlreadyExistsException;
-import org.eduorg.msauth.user.application.sing_up.dto.SignUpApplicationEntryDto;
+import org.eduorg.msauth.user.application.services.sing_up.dto.SignUpApplicationEntryDto;
 import org.eduorg.msauth.common.application.service.IService;
 import org.eduorg.msauth.common.utils.result.Result;
-import org.eduorg.msauth.user.application.sing_up.dto.SignUpApplicationResponseDto;
+import org.eduorg.msauth.user.application.services.sing_up.dto.SignUpApplicationResponseDto;
 import org.eduorg.msauth.user.domain.User;
 import org.eduorg.msauth.user.domain.repository.IUserRepository;
 import org.eduorg.msauth.user.domain.vo.*;

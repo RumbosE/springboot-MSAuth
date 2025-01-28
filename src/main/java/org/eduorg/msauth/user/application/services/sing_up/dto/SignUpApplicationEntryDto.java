@@ -1,4 +1,4 @@
-package org.eduorg.msauth.user.application.sing_up.dto;
+package org.eduorg.msauth.user.application.services.sing_up.dto;
 
 import org.eduorg.msauth.common.application.service.dto.ApplicationServiceEntryDto;
 

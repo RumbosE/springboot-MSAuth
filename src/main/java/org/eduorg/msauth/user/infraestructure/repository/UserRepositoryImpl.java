@@ -37,7 +37,7 @@ public class UserRepositoryImpl implements IUserRepository {
     @Override
     public Optional<User> findUserByEmail(UserEmail email) {
 
-        OdmUserEntity entity = mongoUserRepository.findByEmail(email.getEmail());
+        OdmUserEntity entity = mongoUserRepository.findByEmail(email.getEmail()).orElse(null);
 
         if (entity == null) {
             return Optional.empty();

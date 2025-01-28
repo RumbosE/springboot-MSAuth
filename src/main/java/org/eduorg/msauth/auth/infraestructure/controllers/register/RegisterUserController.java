@@ -1,4 +1,4 @@
-package org.eduorg.msauth.user.infraestructure.controller;
+package org.eduorg.msauth.auth.infraestructure.controllers.register;
 
 import jakarta.validation.Valid;
 import org.eduorg.msauth.common.application.aspects.logger.LoggerAspect;
@@ -6,17 +6,17 @@ import org.eduorg.msauth.common.application.service.IService;
 import org.eduorg.msauth.common.infraestructure.logger.LoggerAspectImpl;
 import org.eduorg.msauth.common.infraestructure.password_encoder.PasswordEncoderImpl;
 import org.eduorg.msauth.common.utils.result.Result;
-import org.eduorg.msauth.user.application.sing_up.SingUpApplicationService;
-import org.eduorg.msauth.user.application.sing_up.dto.SignUpApplicationEntryDto;
-import org.eduorg.msauth.user.infraestructure.dto.RegisterUserEntryDto;
-import org.eduorg.msauth.user.application.sing_up.dto.SignUpApplicationResponseDto;
+import org.eduorg.msauth.user.application.services.sing_up.SingUpApplicationService;
+import org.eduorg.msauth.user.application.services.sing_up.dto.SignUpApplicationEntryDto;
+import org.eduorg.msauth.auth.infraestructure.controllers.register.dto.RegisterUserEntryDto;
+import org.eduorg.msauth.user.application.services.sing_up.dto.SignUpApplicationResponseDto;
 import org.eduorg.msauth.user.infraestructure.repository.UserRepositoryImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user/signup")
+@RequestMapping("/auth/signup")
 public class RegisterUserController {
 
     final UserRepositoryImpl userRepository;
