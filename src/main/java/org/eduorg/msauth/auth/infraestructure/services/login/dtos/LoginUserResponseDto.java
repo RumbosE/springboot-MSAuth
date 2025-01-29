@@ -1,4 +1,4 @@
-package org.eduorg.msauth.auth.infraestructure.services.dtos;
+package org.eduorg.msauth.auth.infraestructure.services.login.dtos;
 
 public class LoginUserResponseDto {
 

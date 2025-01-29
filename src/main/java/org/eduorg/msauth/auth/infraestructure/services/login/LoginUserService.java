@@ -1,14 +1,15 @@
-package org.eduorg.msauth.auth.infraestructure.services;
+package org.eduorg.msauth.auth.infraestructure.services.login;
 
 import org.eduorg.msauth.auth.infraestructure.jwt_generator.JwtGenerator;
-import org.eduorg.msauth.auth.infraestructure.services.dtos.LoginUserEntryDto;
-import org.eduorg.msauth.auth.infraestructure.services.dtos.LoginUserResponseDto;
+import org.eduorg.msauth.auth.infraestructure.services.login.dtos.LoginUserEntryDto;
+import org.eduorg.msauth.auth.infraestructure.services.login.dtos.LoginUserResponseDto;
 import org.eduorg.msauth.common.application.jwt_generator.dto.DataJwt;
 import org.eduorg.msauth.common.application.service.IService;
 import org.eduorg.msauth.common.utils.result.Result;
 import org.eduorg.msauth.user.infraestructure.model.OdmUserEntity;
 import org.eduorg.msauth.user.infraestructure.repository.MongoUserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -29,15 +30,17 @@ public class LoginUserService implements IService<LoginUserEntryDto, LoginUserRe
         this.authenticationManager = authenticationManager;
     }
 
-
     @Override
     public Result<LoginUserResponseDto> execute(LoginUserEntryDto data) {
         try{
 
-
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken( data.getEmail(), data.getPassword() )
+            var authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(data.getEmail(), data.getPassword())
             );
+
+            if ( !authentication.isAuthenticated()) {
+                throw new BadCredentialsException("Bad credentials");
+            }
 
             final OdmUserEntity user = userRepo.findByEmail( data.getEmail() )
                     .orElseThrow(LoginException::new );

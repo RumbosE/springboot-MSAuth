@@ -2,10 +2,9 @@ package org.eduorg.msauth.auth.infraestructure.controllers.login;
 
 import jakarta.validation.Valid;
 import org.eduorg.msauth.auth.infraestructure.controllers.login.dto.LoginRequestDto;
-import org.eduorg.msauth.auth.infraestructure.services.LoginUserService;
-import org.eduorg.msauth.auth.infraestructure.services.dtos.LoginUserEntryDto;
-import org.eduorg.msauth.auth.infraestructure.services.dtos.LoginUserResponseDto;
-;
+import org.eduorg.msauth.auth.infraestructure.services.login.LoginUserService;
+import org.eduorg.msauth.auth.infraestructure.services.login.dtos.LoginUserEntryDto;
+import org.eduorg.msauth.auth.infraestructure.services.login.dtos.LoginUserResponseDto;
 import org.eduorg.msauth.common.utils.result.Result;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

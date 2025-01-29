@@ -2,6 +2,7 @@ package org.eduorg.msauth.auth.infraestructure.controllers.register.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -39,6 +40,7 @@ public class RegisterUserEntryDto {
     String phoneNumber;
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @NotNull(message = "Birthdate is mandatory")
     Date birthdate;
 
     @NotBlank(message = "Gender is mandatory")

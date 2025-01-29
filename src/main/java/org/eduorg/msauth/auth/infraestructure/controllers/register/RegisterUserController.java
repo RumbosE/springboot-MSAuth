@@ -1,6 +1,7 @@
 package org.eduorg.msauth.auth.infraestructure.controllers.register;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.eduorg.msauth.common.application.aspects.logger.LoggerAspect;
 import org.eduorg.msauth.common.application.service.IService;
 import org.eduorg.msauth.common.infraestructure.logger.LoggerAspectImpl;
@@ -17,17 +18,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth/signup")
+@RequiredArgsConstructor
 public class RegisterUserController {
 
     final UserRepositoryImpl userRepository;
     final LoggerAspectImpl loggerAspect;
     final PasswordEncoderImpl passwordEncoder;
-
-    public RegisterUserController(UserRepositoryImpl userRepository, LoggerAspectImpl loggerAspect, PasswordEncoderImpl passwordEncoder) {
-        this.userRepository = userRepository;
-        this.loggerAspect = loggerAspect;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @PostMapping
     public ResponseEntity<SignUpApplicationResponseDto> execute( @Valid @RequestBody RegisterUserEntryDto user )  throws Exception {
@@ -55,11 +51,5 @@ public class RegisterUserController {
         } else {
             throw res.getFailure();
         }
-    }
-
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        System.out.println("RegisterUserController.test");
-        return new ResponseEntity<>("Test", HttpStatus.OK);
     }
 }

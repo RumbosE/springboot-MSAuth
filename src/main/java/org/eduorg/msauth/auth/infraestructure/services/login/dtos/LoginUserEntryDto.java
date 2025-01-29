@@ -1,4 +1,4 @@
-package org.eduorg.msauth.auth.infraestructure.services.dtos;
+package org.eduorg.msauth.auth.infraestructure.services.login.dtos;
 
 
 import org.eduorg.msauth.common.application.service.dto.ApplicationServiceEntryDto;
