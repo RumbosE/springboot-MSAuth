@@ -39,7 +39,11 @@ public class GetUserDetailsController {
         } else {
             throw result.getFailure();
         }
+    }
 
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("Test");
     }
 
 }
