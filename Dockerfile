@@ -41,4 +41,4 @@ COPY --from=build /app/build/libs/*.jar /app/app.jar
 CMD ["java", "-jar", "app.jar"]
 
 # Exponer el puerto 8080
-EXPOSE 8080
+EXPOSE $PORT
