@@ -21,7 +21,11 @@ services:
   ms-auth:
     build:
       context: .
+      target: dev
       dockerfile: Dockerfile
+    volumes:
+      - .:/app/
+      #- /app/.gradle
     ports:
       - ${APP_PORT}:8080
     restart: always

@@ -43,7 +43,7 @@ public class GetUserDetailsController {
 
     @GetMapping("/test")
     public ResponseEntity<String> test() {
-        return ResponseEntity.ok("Test");
+        return ResponseEntity.ok("Test !!!");
     }
 
 }

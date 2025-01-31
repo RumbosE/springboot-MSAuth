@@ -1,0 +1,29 @@
+# Gradle
+.gradle
+build/
+
+# Directorios de configuración de IDEs
+.idea
+*.iml
+*.ipr
+*.iws
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de logs y otros archivos temporales
+*.log
+*.tmp
+
+# Configuración de sistema y archivos de entorno
+.env
+.settings/
+
+# Archivos de control de versiones
+.git
+.gitignore
+
+# Archivos y directorios específicos de Docker
+Dockerfile
+docker-compose.yml
