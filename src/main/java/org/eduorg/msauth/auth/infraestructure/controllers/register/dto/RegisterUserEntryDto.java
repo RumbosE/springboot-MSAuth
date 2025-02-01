@@ -44,6 +44,6 @@ public class RegisterUserEntryDto {
     Date birthdate;
 
     @NotBlank(message = "Gender is mandatory")
-    @Pattern(regexp = "[MFO]", message="Gender must be G, M, or O")
+    @Pattern(regexp = "[MFO]", message="Gender must be F, M, or O")
     String gender;
 }

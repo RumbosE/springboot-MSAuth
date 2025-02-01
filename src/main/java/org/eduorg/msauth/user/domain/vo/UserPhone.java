@@ -20,6 +20,11 @@ public class UserPhone implements ValueObject<UserPhone> {
         if(number == null || number.length() < 6 || number.length() > 16) {
             throw new  InvalidUserPhoneException(code + "-" + number);
         }
+
+        if(!PHONE_PATTERN.matcher(code + "-" + number).matches()) {
+            throw new  InvalidUserPhoneException(code + "-" + number);
+        }
+
         this.code = code;
         this.number = number;
     }
