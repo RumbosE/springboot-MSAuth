@@ -1,5 +1,6 @@
 package org.eduorg.msauth.user.infraestructure.repository;
 
+import org.eduorg.msauth.user.application.exceptions.NonExistentUserException;
 import org.eduorg.msauth.user.domain.User;
 import org.eduorg.msauth.user.domain.repository.IUserRepository;
 import org.eduorg.msauth.user.domain.vo.UserEmail;
@@ -44,5 +45,18 @@ public class UserRepositoryImpl implements IUserRepository {
         }
 
         return Optional.of(userMapper.fromPersistenceToDomain(entity));
+    }
+
+    @Override
+    public void updateUser(User user) {
+        Optional<OdmUserEntity> existingEntityOpt = mongoUserRepository.findByEmail(user.getEmail().getEmail());
+        if (existingEntityOpt.isPresent()) {
+            OdmUserEntity existingEntity = existingEntityOpt.get();
+            OdmUserEntity updatedEntity = userMapper.fromDomainToPersistence(user);
+            updatedEntity.setPassword(existingEntity.getPassword()); // Mantén la contraseña existente
+            mongoUserRepository.save(updatedEntity);
+        } else {
+            throw new NonExistentUserException();
+        }
     }
 }

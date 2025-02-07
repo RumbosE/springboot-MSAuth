@@ -14,7 +14,7 @@ public abstract class DomainEvents {
     }
 
     public String eventName() {
-        return this.getClass().getName();
+        return this.getClass().getSimpleName();
     }
 
 }

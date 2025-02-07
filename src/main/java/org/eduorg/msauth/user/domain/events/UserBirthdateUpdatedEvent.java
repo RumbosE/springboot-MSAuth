@@ -6,9 +6,9 @@ import org.eduorg.msauth.user.domain.vo.UserId;
 
 public class UserBirthdateUpdatedEvent extends DomainEvents {
 
-    private UserId userId;
-    private UserBirthdate oldBirthdate;
-    private UserBirthdate newBirthdate;
+    private final UserId userId;
+    private final UserBirthdate oldBirthdate;
+    private final UserBirthdate newBirthdate;
 
     private UserBirthdateUpdatedEvent(UserId userId, UserBirthdate oldBirthdate, UserBirthdate newBirthdate) {
         this.userId = userId;

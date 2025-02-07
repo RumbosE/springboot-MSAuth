@@ -6,15 +6,17 @@ import org.eduorg.msauth.user.domain.vo.UserPhone;
 
 public class UserPhoneUpdatedEvent extends DomainEvents {
 
-    private UserId userId;
-    private UserPhone oldPhone;
-    private UserPhone newPhone;
+    private final UserId userId;
+    private final UserPhone oldPhone;
+    private final UserPhone newPhone;
 
     private UserPhoneUpdatedEvent(UserId userId, UserPhone oldPhone, UserPhone newPhone) {
         this.userId = userId;
         this.oldPhone = oldPhone;
         this.newPhone = newPhone;
     }
+
+    public UserId getUserId() {return userId;}
 
     public UserPhone getOldPhone() {
         return oldPhone;

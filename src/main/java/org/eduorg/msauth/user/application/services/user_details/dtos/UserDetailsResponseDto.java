@@ -1,6 +1,7 @@
 package org.eduorg.msauth.user.application.services.user_details.dtos;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public record UserDetailsResponseDto(
@@ -9,7 +10,7 @@ public record UserDetailsResponseDto(
         String lastName,
         String email,
         String phone,
-        Date birthDate,
+        LocalDate birthDate,
         String gender
 ) {
 }

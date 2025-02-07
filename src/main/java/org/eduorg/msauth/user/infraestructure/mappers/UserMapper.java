@@ -7,6 +7,7 @@ import org.eduorg.msauth.user.domain.vo.*;
 import org.eduorg.msauth.user.infraestructure.model.OdmPhone;
 import org.eduorg.msauth.user.infraestructure.model.OdmUserEntity;
 
+import java.text.ParseException;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -34,14 +35,14 @@ public class UserMapper implements IMapper<User, OdmUserEntity> {
     @Override
     public User fromPersistenceToDomain(OdmUserEntity persistence) {
 
-        return User.create(
-                UserId.create(persistence.getId()),
-                UserName.create(persistence.getName(), persistence.getLastname()),
-                UserEmail.create(persistence.getEmail()),
-                UserPhone.create(persistence.getPhone().getCode(), persistence.getPhone().getNumber()),
-                UserBirthdate.create(persistence.getBirthdate()),
-                mapGender(persistence.getGender())
-        );
+            return User.create(
+                    UserId.create(persistence.getId()),
+                    UserName.create(persistence.getName(), persistence.getLastname()),
+                    UserEmail.create(persistence.getEmail()),
+                    UserPhone.create(persistence.getPhone().getCode(), persistence.getPhone().getNumber()),
+                    UserBirthdate.create(persistence.getBirthdate()),
+                    mapGender(persistence.getGender())
+            );
     }
 
     private UserGender mapGender( String g ){

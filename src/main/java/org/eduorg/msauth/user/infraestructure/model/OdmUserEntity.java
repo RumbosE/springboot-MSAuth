@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -27,6 +28,6 @@ public class OdmUserEntity {
     private String email;
     private OdmPhone phone;
     private String gender;
-    private Date birthdate;
+    private LocalDate birthdate;
 
 }

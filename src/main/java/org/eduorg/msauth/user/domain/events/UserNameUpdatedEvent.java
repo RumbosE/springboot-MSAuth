@@ -6,9 +6,9 @@ import org.eduorg.msauth.user.domain.vo.UserName;
 
 public class UserNameUpdatedEvent extends DomainEvents {
 
-        private UserId userId;
-        private UserName oldUserName;
-        private UserName newUserName;
+        private final UserId userId;
+        private final UserName oldUserName;
+        private final UserName newUserName;
 
         private UserNameUpdatedEvent(UserId userId, UserName oldUserName, UserName newUserName) {
             this.userId = userId;

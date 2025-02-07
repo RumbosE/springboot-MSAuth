@@ -9,7 +9,7 @@ import org.eduorg.msauth.common.infraestructure.password_encoder.PasswordEncoder
 import org.eduorg.msauth.common.utils.result.Result;
 import org.eduorg.msauth.user.application.services.sing_up.SingUpApplicationService;
 import org.eduorg.msauth.user.application.services.sing_up.dto.SignUpApplicationEntryDto;
-import org.eduorg.msauth.auth.infraestructure.controllers.register.dto.RegisterUserEntryDto;
+import org.eduorg.msauth.auth.infraestructure.controllers.register.dto.RegisterUserRequestDto;
 import org.eduorg.msauth.user.application.services.sing_up.dto.SignUpApplicationResponseDto;
 import org.eduorg.msauth.user.infraestructure.repository.UserRepositoryImpl;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ public class RegisterUserController {
     final PasswordEncoderImpl passwordEncoder;
 
     @PostMapping
-    public ResponseEntity<SignUpApplicationResponseDto> execute( @Valid @RequestBody RegisterUserEntryDto user )  throws Exception {
+    public ResponseEntity<SignUpApplicationResponseDto> execute( @Valid @RequestBody RegisterUserRequestDto user )  throws Exception {
 
         SignUpApplicationEntryDto dto = new SignUpApplicationEntryDto(
                 user.getEmail(),

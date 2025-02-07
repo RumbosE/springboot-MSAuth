@@ -2,6 +2,7 @@ package org.eduorg.msauth.user.application.services.sing_up.dto;
 
 import org.eduorg.msauth.common.application.service.dto.ApplicationServiceEntryDto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -13,10 +14,10 @@ public class SignUpApplicationEntryDto extends ApplicationServiceEntryDto {
     String lastname;
     String phoneCode;
     String phone;
-    Date birthdate;
+    LocalDate birthdate;
     String gender;
 
-    public SignUpApplicationEntryDto(String email, String password, String name, String surname, String phoneCode, String phone, Date birthdate, String gender) {
+    public SignUpApplicationEntryDto(String email, String password, String name, String surname, String phoneCode, String phone, LocalDate birthdate, String gender) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -51,7 +52,7 @@ public class SignUpApplicationEntryDto extends ApplicationServiceEntryDto {
         return phone;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 

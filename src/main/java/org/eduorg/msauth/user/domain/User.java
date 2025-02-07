@@ -2,10 +2,7 @@ package org.eduorg.msauth.user.domain;
 
 import org.eduorg.msauth.common.domain.aggregate_root.AggregateRoot;
 import org.eduorg.msauth.common.domain.domain_events.DomainEvents;
-import org.eduorg.msauth.user.domain.events.UserBirthdateUpdatedEvent;
-import org.eduorg.msauth.user.domain.events.UserCreatedEvent;
-import org.eduorg.msauth.user.domain.events.UserNameUpdatedEvent;
-import org.eduorg.msauth.user.domain.events.UserPhoneUpdatedEvent;
+import org.eduorg.msauth.user.domain.events.*;
 import org.eduorg.msauth.user.domain.exceptions.InvalidUserStateException;
 import org.eduorg.msauth.user.domain.vo.*;
 
@@ -16,7 +13,7 @@ public class User extends AggregateRoot<UserId> {
     private final UserEmail email;
     private UserPhone phone;
     private UserBirthdate birthdate;
-    private final UserGender gender;
+    private  UserGender gender;
 
     public User( UserId id, UserName name, UserEmail email, UserPhone phone, UserBirthdate birthdate, UserGender gender) {
         super( id, UserCreatedEvent.create( id.getId(), name.getFullName(), email.getEmail(), phone.getFullPhone(), birthdate.getBirthdate(), gender.toString() ));
@@ -44,6 +41,10 @@ public class User extends AggregateRoot<UserId> {
             case "UserBirthdateUpdatedEvent":
                 System.out.println("UserBirthdateUpdatedEvent, old birthdate: " + ((UserBirthdateUpdatedEvent)event).getOldBirthdate().getBirthdate() + ", new birthdate: " + ((UserBirthdateUpdatedEvent)event).getNewBirthdate().getBirthdate());
                 this.birthdate = ((UserBirthdateUpdatedEvent)event).getNewBirthdate();
+                break;
+            case "UserGenderUpdatedEvent":
+                System.out.println("UserGenderUpdatedEvent, old gender: " + ((UserGenderUpdatedEvent)event).getOldGender() + ", new name: " + ((UserGenderUpdatedEvent)event).getNewGender());
+                this.gender = ((UserGenderUpdatedEvent)event).getNewGender();
                 break;
             default:
                 System.out.println("Default Event?");
@@ -110,6 +111,16 @@ public class User extends AggregateRoot<UserId> {
                         this.id,
                         this.birthdate,
                         birthdate
+                )
+        );
+    }
+
+    public void updateGender(UserGender gender){
+        this.applyEvent(
+                UserGenderUpdatedEvent.create(
+                        this.id,
+                        this.gender,
+                        gender
                 )
         );
     }

@@ -3,20 +3,21 @@ package org.eduorg.msauth.user.domain.vo;
 import org.eduorg.msauth.common.domain.value_object.ValueObject;
 import org.eduorg.msauth.user.domain.exceptions.InvalidUserBirthdateException;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class UserBirthdate implements ValueObject<UserBirthdate> {
 
-        private final Date birthdate;
+        private final LocalDate birthdate;
 
-        public UserBirthdate(Date birthdate) {
-            if (birthdate == null || birthdate.after(new Date()) || birthdate.before(new Date(0)) ) {
+        public UserBirthdate(LocalDate birthdate) {
+            if (birthdate == null || birthdate.isAfter( LocalDate.now() ) || birthdate.isBefore( LocalDate.EPOCH ) ) {
                 throw new InvalidUserBirthdateException();
             }
             this.birthdate = birthdate;
         }
 
-        public Date getBirthdate() {
+        public LocalDate getBirthdate() {
             return birthdate;
         }
 
@@ -25,7 +26,7 @@ public class UserBirthdate implements ValueObject<UserBirthdate> {
             return this.birthdate.equals(otherBirthdate.getBirthdate());
         }
 
-        public static UserBirthdate create(Date birthdate) {
+        public static UserBirthdate create(LocalDate birthdate) {
             return new UserBirthdate(birthdate);
         }
 }

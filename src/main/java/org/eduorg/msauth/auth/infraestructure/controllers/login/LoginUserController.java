@@ -19,6 +19,7 @@ public class LoginUserController {
 
     private final LoginUserService service;
 
+    
     public LoginUserController(LoginUserService service) {
 
         this.service = service;

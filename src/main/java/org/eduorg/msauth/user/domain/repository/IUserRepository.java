@@ -15,4 +15,6 @@ public interface IUserRepository {
     Optional<User> findUserById(UserId id);
 
     Optional<User> findUserByEmail(UserEmail email);
+
+    void updateUser(User user);
 }

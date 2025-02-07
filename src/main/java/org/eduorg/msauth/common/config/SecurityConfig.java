@@ -3,6 +3,8 @@ package org.eduorg.msauth.common.config;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.eduorg.msauth.auth.infraestructure.repository.Token;
+import org.eduorg.msauth.auth.infraestructure.repository.TokenRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +28,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    private final TokenRepository tokenRepository;
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthFilter;
 
@@ -54,10 +57,20 @@ public class SecurityConfig {
             final HttpServletRequest request, final HttpServletResponse response,
             final Authentication authentication
     ) {
+        System.out.println(request.getHeader(HttpHeaders.AUTHORIZATION));
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
-        SecurityContextHolder.clearContext();
+
+        final String jwt = authHeader.substring(7);
+        final Token storedToken = tokenRepository.findByToken(jwt)
+                .orElse(null);
+        if (storedToken != null) {
+            storedToken.setExpired(true);
+            storedToken.setRevoked(true);
+            tokenRepository.save(storedToken);
+            SecurityContextHolder.clearContext();
+        }
     }
 }
